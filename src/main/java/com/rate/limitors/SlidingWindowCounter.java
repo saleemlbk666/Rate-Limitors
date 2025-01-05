@@ -39,11 +39,13 @@ public class SlidingWindowCounter {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        SlidingWindowCounter rateLimiter = new SlidingWindowCounter(2, 5);
+        SlidingWindowCounter rateLimiter = new SlidingWindowCounter(60, 5); // 5 requests per minute
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 10; i++) {
             System.out.println("Request " + i + " acceptance status: " + rateLimiter.allowRequest());
-            Thread.sleep(500);
+            Thread.sleep(100);
         }
+        Thread.sleep(30000); // wait for 30 seconds
+        System.out.println("Request 10 acceptance status: " + rateLimiter.allowRequest()); // Might be true or false depending on the exact timing
     }
 }
