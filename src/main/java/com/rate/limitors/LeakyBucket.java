@@ -19,8 +19,8 @@ public class LeakyBucket {
     }
 
     public boolean allowRequest() {
-        LocalDateTime now = LocalDateTime.now();
-        long leakTime = Duration.between(lastLeakedTime, now).getSeconds();
+        LocalDateTime currentTime = LocalDateTime.now();
+        long leakTime = Duration.between(lastLeakedTime, currentTime).getSeconds();
         long leakedDrops = this.leakRate * leakTime;
 
         if (leakedDrops > 0) {
